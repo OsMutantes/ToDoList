@@ -26,11 +26,9 @@ fun InterFontFamily(): FontFamily {
 fun AppTypography(): Typography {
     val fontFamily = InterFontFamily()
     return Typography(
-
         h1 = TextStyle(
             fontSize = 32.sp,
             fontWeight = FontWeight.Bold,
-
             fontFamily = fontFamily
         ),
         h2 = TextStyle(
@@ -53,7 +51,6 @@ fun AppTypography(): Typography {
             fontWeight = FontWeight.Medium,
             fontFamily = fontFamily
         )
-
     )
 }
 
