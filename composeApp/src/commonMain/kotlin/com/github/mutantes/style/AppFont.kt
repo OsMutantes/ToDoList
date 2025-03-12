@@ -8,17 +8,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import todoapp.composeapp.generated.resources.`Inter_VariableFont_opsz,wght`
 import todoapp.composeapp.generated.resources.Res
+import org.jetbrains.compose.resources.Font
 
 @Composable
 fun InterFontFamily(): FontFamily {
     return FontFamily(
-        org.jetbrains.compose.resources.Font(
+        Font(
             Res.font.`Inter_VariableFont_opsz,wght`,
-            FontWeight.Bold
+            weight = FontWeight.Normal
         ),
-        org.jetbrains.compose.resources.Font(
+        Font(
             Res.font.`Inter_VariableFont_opsz,wght`,
-            FontWeight.Normal)
+            weight = FontWeight.Bold
+        )
     )
 }
 
@@ -26,13 +28,8 @@ fun InterFontFamily(): FontFamily {
 fun AppTypography(): Typography {
     val fontFamily = InterFontFamily()
     return Typography(
-        h1 = TextStyle(
-            fontSize = 32.sp,
-            fontWeight = FontWeight.Bold,
-            fontFamily = fontFamily
-        ),
-        h2 = TextStyle(
-            fontSize = 24.sp,
+        h4 = TextStyle(
+            fontSize = 14.sp,
             fontWeight = FontWeight.Bold,
             fontFamily = fontFamily
         ),
@@ -46,11 +43,6 @@ fun AppTypography(): Typography {
             fontWeight = FontWeight.Normal,
             fontFamily = fontFamily
         ),
-        subtitle1 = TextStyle(
-            fontSize = 12.sp,
-            fontWeight = FontWeight.Medium,
-            fontFamily = fontFamily
-        )
     )
 }
 
