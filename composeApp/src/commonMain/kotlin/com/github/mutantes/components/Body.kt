@@ -16,5 +16,6 @@ fun Body(){
         .background(Colors.gray600)
         .height(200.dp)) {
         ToDoInput(onAdd = { println(it) })
+        Counter(created = 100, completed = 100)
     }
 }
