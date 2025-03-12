@@ -14,7 +14,8 @@ fun main() = application {
     Window(
         onCloseRequest = ::exitApplication,
         title = "ToDoApp",
-        state = state
+        state = state,
+        resizable = false
     ) {
         App()
     }
