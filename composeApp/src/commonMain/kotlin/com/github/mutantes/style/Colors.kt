@@ -1,9 +1,6 @@
 package com.github.mutantes.style
 import androidx.compose.ui.graphics.Color
 
-
-
-
 object Colors {
     val blueLight = Color(0xFF4EA8DE)
     val blueDark = Color(0xFF1E6F9F)
@@ -17,6 +14,6 @@ object Colors {
     val gray300 = Color(0xFF808080)
     val gray200 = Color(0xFFD9D9D9)
     val gray100 = Color(0xFFF2F2F2)
-    val feedbackColor = Color(0xE25858)
+    val feedbackColor = Color(0xE25858) // Vermelho
 }
 
