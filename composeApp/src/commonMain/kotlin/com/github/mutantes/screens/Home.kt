@@ -20,7 +20,7 @@ fun Home() {
             interactionSource = interactionSource,
             indication = null
         ) {
-            focusManager.clearFocus(true)
+            // focusManager.clearFocus(true)
         }) {
         Header()
         Body()
