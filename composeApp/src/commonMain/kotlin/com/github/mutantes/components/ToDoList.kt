@@ -11,6 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
@@ -66,12 +69,37 @@ fun ToDoCard(toDo: ToDo) {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(modifier = Modifier
-                .weight(1f),
-                text = toDo.description,
+            var lineCount = 1
+            val lineList = mutableListOf<Float>()
+            val lineCenters = mutableListOf<Float>()
+            Text(
+                onTextLayout = { textLayoutResult ->
+                    lineCount = textLayoutResult.lineCount
+                    lineList.clear()
+                    lineCenters.clear()
+                    for (i in 0 until lineCount) {
+                        lineList.add(textLayoutResult.getLineRight(i))
+                        val top = textLayoutResult.getLineTop(i)
+                        val bottom = textLayoutResult.getLineBottom(i)
+                        lineCenters.add((top + bottom) / 2)
+                    }
+                },
+                modifier = Modifier.drawWithContent {
+                    drawContent()
+                    val strokeWidth = 2.dp.toPx()
+                    for (i in 0 until lineCount) {
+                        drawLine(
+                            color = if (toDo.isChecked) Colors.gray300 else Color.Transparent,
+                            strokeWidth = strokeWidth,
+                            start = Offset(0f, lineCenters.getOrElse(i) { 0f }),
+                            end = Offset(lineList.getOrElse(i) { size.width }, lineCenters.getOrElse(i) { 0f })
+                        )
+                    }
+                }.weight(1f),
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
-                style = if (toDo.isChecked) MaterialTheme.typography.body2.copy(textDecoration = TextDecoration.LineThrough) else MaterialTheme.typography.body2,
+                text = toDo.description,
+                style = MaterialTheme.typography.body2,
                 color = if (toDo.isChecked) Colors.gray300 else Colors.gray100,
             )
             Image(
