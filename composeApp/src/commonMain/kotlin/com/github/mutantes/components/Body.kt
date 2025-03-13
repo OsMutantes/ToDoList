@@ -24,7 +24,7 @@ fun Body(){
             ToDo(isChecked = false, description = "testando a teste"),
             ToDo(isChecked = true, description = "testando a lista"),
             ToDo(isChecked = true, description = "testando a coisa"),
-            ToDo(isChecked = false, description = "testando a erick"),
+            ToDo(isChecked = false, description = "ed  at ex. Donec non elementum nisi, vel vulputate dasdasdasf fsdfasdfasd fasdfasdfsaf afasfsdasa.  a erick"),
             ToDo(isChecked = true, description = "testando a italo"),
             ToDo(isChecked = false, description = "testando a julio"),
             ToDo(isChecked = false, description = "testando a amit")

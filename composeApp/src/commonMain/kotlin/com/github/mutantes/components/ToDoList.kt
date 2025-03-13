@@ -13,10 +13,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.github.mutantes.model.ToDo
 import com.github.mutantes.style.Colors
 import org.jetbrains.compose.resources.painterResource
+import todoapp.composeapp.generated.resources.*
 import todoapp.composeapp.generated.resources.Res
 import todoapp.composeapp.generated.resources.check_false
 import todoapp.composeapp.generated.resources.check_true
@@ -57,11 +59,29 @@ fun ToDoCard(toDo: ToDo) {
             painter = painterResource(if (toDo.isChecked) Res.drawable.check_true else Res.drawable.check_false),
             contentDescription = null
         )
-        Text(
-            toDo.description,
-            style = if (toDo.isChecked) MaterialTheme.typography.body2.copy(textDecoration = TextDecoration.LineThrough) else MaterialTheme.typography.body2,
-            color = if (toDo.isChecked) Colors.gray300 else Colors.gray100,
-        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(modifier = Modifier
+                .weight(1f),
+                text = toDo.description,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                style = if (toDo.isChecked) MaterialTheme.typography.body2.copy(textDecoration = TextDecoration.LineThrough) else MaterialTheme.typography.body2,
+                color = if (toDo.isChecked) Colors.gray300 else Colors.gray100,
+            )
+            Image(
+                modifier = Modifier
+                    .padding(start = (15.25).dp, end = 11.dp)
+                    .size((17.45).dp),
+                painter = painterResource(Res.drawable.trash),
+                contentDescription = null
+            )
+        }
     }
 }
 
