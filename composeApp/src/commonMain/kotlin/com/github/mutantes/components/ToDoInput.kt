@@ -25,13 +25,14 @@ import todoapp.composeapp.generated.resources.Res
 import todoapp.composeapp.generated.resources.plus
 
 @Composable
-fun ToDoInput(onAdd : (inputText : String)->Unit) {
+fun ToDoInput(onAdd: (inputText: String) -> Unit) {
     val focusRequester = remember { FocusRequester() }
     var value by remember { mutableStateOf("") }
     var isFocused by remember { mutableStateOf(false) }
 
-    Row(modifier = Modifier
-        .offset (y = (-26).dp)
+    Row(
+        modifier = Modifier
+            .offset(y = (-26).dp)
     ) {
         Box(
             modifier = Modifier
@@ -52,7 +53,8 @@ fun ToDoInput(onAdd : (inputText : String)->Unit) {
                 }, contentAlignment = Alignment.CenterStart
         ) {
             BasicTextField(
-                modifier = Modifier.padding(16.dp),
+                modifier = Modifier.padding(16.dp)
+                    .fillMaxWidth(),
                 value = value,
                 onValueChange = { value = it },
                 maxLines = 1,
@@ -69,21 +71,26 @@ fun ToDoInput(onAdd : (inputText : String)->Unit) {
                 }, cursorBrush = SolidColor(Colors.gray100)
             )
         }
-        Box(modifier = Modifier
-            .padding(start = 4.dp, end = 20.dp)
-            .size(51.dp)
-            .padding(top = 1.dp, bottom = 1.dp)
-            .clip(RoundedCornerShape(6.dp))
-            .background(Colors.blueDark)
-            .clickable{
-                onAdd(value)
-                value = ""
-            },
+        Box(
+            modifier = Modifier
+                .padding(start = 4.dp, end = 20.dp)
+                .size(51.dp)
+                .padding(top = 1.dp, bottom = 1.dp)
+                .clip(RoundedCornerShape(6.dp))
+                .background(Colors.blueDark)
+                .clickable {
+                    if(value.isNotBlank())onAdd(value)
+                    value = ""
+                },
             contentAlignment = Alignment.Center
-        ){
-            Image(modifier = Modifier
-                .size(16.dp)
-                , painter = painterResource(Res.drawable.plus), contentDescription = null, colorFilter = ColorFilter.tint(Colors.gray100))
+        ) {
+            Image(
+                modifier = Modifier
+                    .size(16.dp),
+                painter = painterResource(Res.drawable.plus),
+                contentDescription = null,
+                colorFilter = ColorFilter.tint(Colors.gray100)
+            )
         }
     }
 }
