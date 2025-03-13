@@ -70,8 +70,7 @@ fun ToDoCard(
                 .clickable { onChecked(index) }
                 .padding(start = (15.25).dp, end = 11.dp)
                 .size((17.45).dp),
-            painter = if (toDo.isChecked) painterResource(Res.drawable.check_true) else painterResource(Res.drawable.check_false),
-                //painterResource(if (toDo.isChecked) Res.drawable.check_true else Res.drawable.check_false),
+                painter = painterResource(if (toDo.isChecked) Res.drawable.check_true else Res.drawable.check_false),
             contentDescription = null
         )
         Row(
