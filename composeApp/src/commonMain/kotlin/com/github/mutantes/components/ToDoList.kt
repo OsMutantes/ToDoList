@@ -3,6 +3,7 @@ package com.github.mutantes.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
@@ -28,18 +29,27 @@ import todoapp.composeapp.generated.resources.check_true
 import todoapp.composeapp.generated.resources.clipboard
 
 @Composable
-fun ToDoList(list: List<ToDo>) {
+fun ToDoList(
+    list: MutableList<ToDo>,
+    onChecked: (index: Int) -> Unit,
+    onDelete: (index: Int) -> Unit
+) {
     if (list.isEmpty()) {
         EmptyList()
     } else {
-        list.forEach {
-            ToDoCard(it)
+        list.forEachIndexed { index, todo ->
+            ToDoCard(index, todo, onChecked, onDelete)
         }
     }
 }
 
 @Composable
-fun ToDoCard(toDo: ToDo) {
+fun ToDoCard(
+    index : Int,
+    toDo: ToDo,
+    onChecked: (index : Int) -> Unit,
+    onDelete: (index : Int) -> Unit
+) {
     Row(
         modifier = Modifier
             .height(64.dp)
@@ -57,9 +67,11 @@ fun ToDoCard(toDo: ToDo) {
     ) {
         Image(
             modifier = Modifier
+                .clickable { onChecked(index) }
                 .padding(start = (15.25).dp, end = 11.dp)
                 .size((17.45).dp),
-            painter = painterResource(if (toDo.isChecked) Res.drawable.check_true else Res.drawable.check_false),
+            painter = if (toDo.isChecked) painterResource(Res.drawable.check_true) else painterResource(Res.drawable.check_false),
+                //painterResource(if (toDo.isChecked) Res.drawable.check_true else Res.drawable.check_false),
             contentDescription = null
         )
         Row(
@@ -104,8 +116,10 @@ fun ToDoCard(toDo: ToDo) {
             )
             Image(
                 modifier = Modifier
-                    .padding(start = (15.25).dp, end = 11.dp)
-                    .size((17.45).dp),
+                    .clickable { onDelete(index) }
+                    .padding(start = (15.25).dp, end = 16.dp)
+                    .height(14.dp)
+                    .width(12.dp),
                 painter = painterResource(Res.drawable.trash),
                 contentDescription = null
             )
