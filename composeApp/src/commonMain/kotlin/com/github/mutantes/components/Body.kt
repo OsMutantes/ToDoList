@@ -22,7 +22,7 @@ fun Body() {
             .background(Colors.gray600)
             .height(200.dp)
     ) {
-        ToDoInput(onAdd = { list.add(ToDo(isChecked = false, description = it)) })
+        ToDoInput(onAdd = { list.add(ToDo(isCheckedInitial = false, description = it)) })
         Counter(created = list.size, completed = list.filter { it.isChecked }.size)
         Spacer(modifier = Modifier.height(20.dp))
         ToDoList(
@@ -32,6 +32,6 @@ fun Body() {
                 list.removeAt(it)
                 list.add(index = it, todo)
             },
-            onDelete = { println("deletei o arquivo $it") })
+            onDelete = { list.removeAt(it) })
     }
 }
