@@ -4,19 +4,23 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import org.jetbrains.compose.resources.painterResource
+import todoapp.composeapp.generated.resources.Res
+import todoapp.composeapp.generated.resources.icon
 
 fun main() = application {
 
     val state = rememberWindowState(
-        height = 1280.dp,
-        width = 720.dp
+        height = 800.dp,
+        width = 600.dp
     )
 
     Window(
         onCloseRequest = ::exitApplication,
         title = "ToDoApp",
         state = state,
-        resizable = false
+        resizable = false,
+        icon = painterResource(Res.drawable.icon)
     ) {
         App()
     }

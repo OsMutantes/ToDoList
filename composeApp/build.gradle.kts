@@ -96,8 +96,16 @@ compose.desktop {
             packageVersion = "1.0.0"
 
             macOS {
-                iconFile.set(project.file("macos.icns"))
+                iconFile.set(project.file("icon.icns"))
                 dockName = "ToDoApp"
+            }
+
+            windows {
+                iconFile.set(project.file("icon.ico"))
+            }
+
+            linux {
+                iconFile.set(project.file("icon.png"))
             }
         }
     }
