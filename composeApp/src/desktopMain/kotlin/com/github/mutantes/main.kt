@@ -11,6 +11,7 @@ fun main() = application {
         height = 1280.dp,
         width = 720.dp
     )
+
     Window(
         onCloseRequest = ::exitApplication,
         title = "ToDoApp",

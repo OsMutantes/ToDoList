@@ -92,8 +92,13 @@ compose.desktop {
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.github.mutantes"
+            packageName = "ToDoApp"
             packageVersion = "1.0.0"
+
+            macOS {
+                iconFile.set(project.file("macos.icns"))
+                dockName = "ToDoApp"
+            }
         }
     }
 }
