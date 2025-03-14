@@ -7,6 +7,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -18,6 +19,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import com.github.mutantes.style.Colors
 import org.jetbrains.compose.resources.painterResource
@@ -58,6 +60,10 @@ fun ToDoInput(onAdd: (inputText: String) -> Unit) {
                 value = value,
                 onValueChange = { value = it },
                 maxLines = 1,
+                keyboardOptions = KeyboardOptions(
+                    capitalization = KeyboardCapitalization.Sentences,
+                    autoCorrectEnabled = true
+                ),
                 textStyle = MaterialTheme.typography.body1.copy(color = Colors.gray100),
                 decorationBox = { innerTextField ->
                     if (value.isEmpty()) {
@@ -79,7 +85,7 @@ fun ToDoInput(onAdd: (inputText: String) -> Unit) {
                 .clip(RoundedCornerShape(6.dp))
                 .background(Colors.blueDark)
                 .clickable {
-                    if(value.isNotBlank())onAdd(value)
+                    if (value.isNotBlank()) onAdd(value)
                     value = ""
                 },
             contentAlignment = Alignment.Center
