@@ -1,9 +1,6 @@
 package com.github.mutantes.components
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
@@ -16,17 +13,12 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.github.mutantes.model.ToDo
 import com.github.mutantes.style.Colors
 import org.jetbrains.compose.resources.painterResource
 import todoapp.composeapp.generated.resources.*
-import todoapp.composeapp.generated.resources.Res
-import todoapp.composeapp.generated.resources.check_false
-import todoapp.composeapp.generated.resources.check_true
-import todoapp.composeapp.generated.resources.clipboard
 
 @Composable
 fun ToDoList(
@@ -34,21 +26,27 @@ fun ToDoList(
     onChecked: (index: Int) -> Unit,
     onDelete: (index: Int) -> Unit
 ) {
-    if (list.isEmpty()) {
-        EmptyList()
-    } else {
-        list.forEachIndexed { index, todo ->
-            ToDoCard(index, todo, onChecked, onDelete)
+    Column(
+        modifier = Modifier
+            .fillMaxHeight()
+            .verticalScroll(rememberScrollState())
+    ) {
+        if (list.isEmpty()) {
+            EmptyList()
+        } else {
+            list.forEachIndexed { index, todo ->
+                ToDoCard(index, todo, onChecked, onDelete)
+            }
         }
     }
 }
 
 @Composable
 fun ToDoCard(
-    index : Int,
+    index: Int,
     toDo: ToDo,
-    onChecked: (index : Int) -> Unit,
-    onDelete: (index : Int) -> Unit
+    onChecked: (index: Int) -> Unit,
+    onDelete: (index: Int) -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -70,7 +68,7 @@ fun ToDoCard(
                 .clickable { onChecked(index) }
                 .padding(start = (15.25).dp, end = 11.dp)
                 .size((17.45).dp),
-                painter = painterResource(if (toDo.isChecked) Res.drawable.check_true else Res.drawable.check_false),
+            painter = painterResource(if (toDo.isChecked) Res.drawable.check_true else Res.drawable.check_false),
             contentDescription = null
         )
         Row(

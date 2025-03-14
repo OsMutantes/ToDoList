@@ -19,6 +19,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.input.key.*
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import com.github.mutantes.style.Colors
@@ -55,8 +56,14 @@ fun ToDoInput(onAdd: (inputText: String) -> Unit) {
                 }, contentAlignment = Alignment.CenterStart
         ) {
             BasicTextField(
-                modifier = Modifier.padding(16.dp)
-                    .fillMaxWidth(),
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
+                    .onPreviewKeyEvent { if(it.type == KeyEventType.KeyUp && it.key == Key.Enter){
+                        onAdd(value)
+                        value = ""
+                        true
+                    } else false },
                 value = value,
                 onValueChange = { value = it },
                 maxLines = 1,
