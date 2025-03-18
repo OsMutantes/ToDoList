@@ -8,9 +8,10 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
 import com.github.mutantes.components.Body
 import com.github.mutantes.components.Header
+import com.github.mutantes.model.ToDoDao
 
 @Composable
-fun Home() {
+fun Home(toDoDao: ToDoDao? = null) {
     val focusManager = LocalFocusManager.current
 
     Column(
@@ -21,6 +22,6 @@ fun Home() {
         }
     ) {
         Header()
-        Body()
+        Body(toDoDao)
     }
 }

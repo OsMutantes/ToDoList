@@ -9,11 +9,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.github.mutantes.model.ToDo
+import com.github.mutantes.model.ToDoDao
 import com.github.mutantes.screens.HomeViewModel
 import com.github.mutantes.style.Colors
 
 @Composable
-fun Body() {
+fun Body(toDoDao: ToDoDao? = null) {
     val homeViewModel = remember { HomeViewModel() }
     val state = homeViewModel.screenState.collectAsState().value
 
