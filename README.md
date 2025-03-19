@@ -1,14 +1,56 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Desktop.
+# ToDoApp
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+ToDoApp é um aplicativo de lista de tarefas desenvolvido em [Compose Multiplatform](https://www.jetbrains.com/compose-multiplatform/), permitindo que ele seja executado em diversas plataformas, incluindo Android, iOS e Desktop. O aplicativo foi construído com a arquitetura MVVM (Model-View-ViewModel) para garantir uma separação clara de responsabilidades e facilitar a manutenção e escalabilidade do código. Para a persistência de dados, foi utilizado o Room, uma biblioteca robusta e eficiente para armazenamento local.
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+# Screenshots
 
+Aqui estão algumas capturas de tela do ToDoApp em diferentes plataformas:
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+<div align="center">
+  <div style="display: flex; justify-content: center; gap: 20px;">
+    <div>
+      <img src="https://github.com/user-attachments/assets/e49a9dd4-9e82-4ee8-bd21-ca1ac67fe209" width="200"/>
+      <p>Desktop</p>
+    </div>
+    <div>
+      <img src="https://github.com/user-attachments/assets/0a96c9d4-6bd7-44b5-9eca-a970c19e06d3" width="200"/>
+      <p>iOS</p>
+    </div>
+    <div>
+      <img src="https://github.com/user-attachments/assets/a75d32ce-18a6-41cb-a5ae-8c4de7248845" width="200"/>
+      <p>Android</p>
+    </div>
+  </div>
+</div>
+
+# Funcionalidades
+
+- Adicionar tarefas: Crie novas tarefas com título, descrição e data de conclusão.
+
+- Excluir tarefas: Remova tarefas que não são mais necessárias.
+
+- Marcar como concluída: Marque tarefas como concluídas para manter o controle do progresso.
+
+- Persistência de dados: Todas as tarefas são armazenadas localmente usando o Room, garantindo que os dados sejam mantidos mesmo após o fechamento do aplicativo.
+
+- Multiplataforma: Funciona em Android, iOS e Desktop com uma base de código compartilhada.
+
+# Arquitetura
+
+O aplicativo segue a arquitetura MVVM (Model-View-ViewModel), que promove uma separação clara entre a lógica de negócios e a interface do usuário. Aqui está uma visão geral dos componentes principais:
+
+- Model: Representa os dados da aplicação e a lógica de negócios. Neste caso, o modelo é gerenciado pelo Room para persistência de dados.
+
+- View: A interface do usuário é construída usando Jetpack Compose, que permite uma UI declarativa e reativa.
+
+- ViewModel: Age como intermediário entre a View e o Model, expondo os dados necessários para a UI e lidando com as interações do usuário.
+
+# Tecnologias Utilizadas
+
+- [Compose Multiplatform](https://www.jetbrains.com/compose-multiplatform/): Para a construção da interface do usuário multiplataforma.
+
+- [Room](https://developer.android.com/kotlin/multiplatform/room/): Para persistência de dados local.
+  
+- [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html): Para operações assíncronas e gerenciamento de threads.
+  
+- [MVVM Architecture](https://developer.android.com/topic/libraries/architecture/viewmodel): Para uma estrutura de código organizada e escalável.
