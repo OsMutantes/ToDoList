@@ -12,8 +12,8 @@ interface ToDoDao {
     fun getAll(): Flow<List<ToDo>>
 
     @Upsert
-    fun upsert(toDo: ToDo)
+    suspend fun upsert(toDo: ToDo)
 
     @Delete
-    fun delete (toDo: ToDo)
+    suspend fun delete (toDo: ToDo)
 }

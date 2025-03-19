@@ -15,7 +15,7 @@ import com.github.mutantes.style.Colors
 
 @Composable
 fun Body(toDoDao: ToDoDao? = null) {
-    val homeViewModel = remember { HomeViewModel() }
+    val homeViewModel = remember { HomeViewModel(toDoDao) }
     val state = homeViewModel.screenState.collectAsState().value
 
     Column(
@@ -29,6 +29,6 @@ fun Body(toDoDao: ToDoDao? = null) {
         Spacer(modifier = Modifier.height(20.dp))
         ToDoList(
             state.toMutableList(), onChecked = { homeViewModel.updateToDo(it) },
-            onDelete = { homeViewModel.removeToDo(state.get(it)) })
+            onDelete = { homeViewModel.removeToDo(it) })
     }
 }
