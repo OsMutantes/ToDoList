@@ -6,9 +6,9 @@ ToDoApp é um aplicativo de lista de tarefas desenvolvido em [Compose Multiplatf
 
 Aqui estão algumas capturas de tela do ToDoApp em diferentes plataformas:
 <p float="left">
-  <img src="https://github.com/user-attachments/assets/e49a9dd4-9e82-4ee8-bd21-ca1ac67fe209" width=33% />
-  <img src="https://github.com/user-attachments/assets/0a96c9d4-6bd7-44b5-9eca-a970c19e06d3" width=33% /> 
-  <img src="https://github.com/user-attachments/assets/a75d32ce-18a6-41cb-a5ae-8c4de7248845" width=33% />
+  <img src="https://github.com/user-attachments/assets/e49a9dd4-9e82-4ee8-bd21-ca1ac67fe209" width=20% />
+  <img src="https://github.com/user-attachments/assets/0a96c9d4-6bd7-44b5-9eca-a970c19e06d3" width=20% /> 
+  <img src="https://github.com/user-attachments/assets/a75d32ce-18a6-41cb-a5ae-8c4de7248845" width=20% />
 </p>
 
 
