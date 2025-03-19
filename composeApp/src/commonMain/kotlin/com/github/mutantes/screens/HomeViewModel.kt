@@ -1,30 +1,53 @@
 package com.github.mutantes.screens
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.github.mutantes.model.ToDo
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import com.github.mutantes.model.ToDoDao
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(private val toDoDao: ToDoDao? = null) : ViewModel() {
 
-    private val _screenState : MutableStateFlow<List<ToDo>> = MutableStateFlow(listOf())
-    val screenState = _screenState.asStateFlow()
+    private val _screenState: MutableStateFlow<List<ToDo>> = MutableStateFlow(emptyList())
+    val screenState: StateFlow<List<ToDo>> = _screenState.asStateFlow()
 
-    fun addToDo(toDo: ToDo){
-        val updatedList = _screenState.value.toMutableList()
-        updatedList.add(toDo)
-        _screenState.value = updatedList
+    init {
+        toDoDao?.let { dao ->
+            viewModelScope.launch {
+                dao.getAll()
+                    .onEach { todos -> _screenState.value = todos }
+                    .launchIn(this)
+            }
+
+            viewModelScope.launch {
+                //dao.upsert(ToDo(isChecked = false, description = "Teste"))
+            }
+        }
     }
-    fun removeToDo(toDo: ToDo){
-        val updatedList = _screenState.value.toMutableList()
-        updatedList.remove(toDo)
-        _screenState.value = updatedList
+
+    fun addToDo(toDo: ToDo) {
+        toDoDao?.let { dao ->
+            viewModelScope.launch {
+                dao.upsert(toDo)
+            }
+        }
     }
-    fun updateToDo(index : Int){
-        val updatedList = _screenState.value.toMutableList()
-        val currentToDo = updatedList[index]
-        val updatedToDo = currentToDo.copy(isChecked = !currentToDo.isChecked)
-        updatedList[index] = updatedToDo
-        _screenState.value = updatedList
+
+    fun removeToDo(toDo: ToDo) {
+        toDoDao?.let { dao ->
+            viewModelScope.launch {
+                dao.delete(toDo)
+            }
+        }
+    }
+
+    fun updateToDo(toDo: ToDo) {
+        toDoDao?.let { dao ->
+            viewModelScope.launch {
+                val updatedToDo = toDo.copy(isChecked = !toDo.isChecked)
+                dao.upsert(updatedToDo)
+            }
+        }
     }
 }

@@ -9,12 +9,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.github.mutantes.model.ToDo
+import com.github.mutantes.model.ToDoDao
 import com.github.mutantes.screens.HomeViewModel
 import com.github.mutantes.style.Colors
 
 @Composable
-fun Body() {
-    val homeViewModel = remember { HomeViewModel() }
+fun Body(toDoDao: ToDoDao? = null) {
+    val homeViewModel = remember { HomeViewModel(toDoDao) }
     val state = homeViewModel.screenState.collectAsState().value
 
     Column(
@@ -28,6 +29,6 @@ fun Body() {
         Spacer(modifier = Modifier.height(20.dp))
         ToDoList(
             state.toMutableList(), onChecked = { homeViewModel.updateToDo(it) },
-            onDelete = { homeViewModel.removeToDo(state.get(it)) })
+            onDelete = { homeViewModel.removeToDo(it) })
     }
 }

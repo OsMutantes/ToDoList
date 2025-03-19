@@ -23,8 +23,8 @@ import todoapp.composeapp.generated.resources.*
 @Composable
 fun ToDoList(
     list: MutableList<ToDo>,
-    onChecked: (index: Int) -> Unit,
-    onDelete: (index: Int) -> Unit
+    onChecked: (toDo : ToDo) -> Unit,
+    onDelete: (toDo : ToDo) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -34,8 +34,8 @@ fun ToDoList(
         if (list.isEmpty()) {
             EmptyList()
         } else {
-            list.forEachIndexed { index, todo ->
-                ToDoCard(index, todo, onChecked, onDelete)
+            list.forEach { todo ->
+                ToDoCard( todo, onChecked, onDelete)
             }
         }
     }
@@ -43,10 +43,9 @@ fun ToDoList(
 
 @Composable
 fun ToDoCard(
-    index: Int,
     toDo: ToDo,
-    onChecked: (index: Int) -> Unit,
-    onDelete: (index: Int) -> Unit
+    onChecked: (toDo : ToDo) -> Unit,
+    onDelete: (toDo : ToDo) -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -65,7 +64,7 @@ fun ToDoCard(
     ) {
         Image(
             modifier = Modifier
-                .clickable { onChecked(index) }
+                .clickable { onChecked(toDo) }
                 .padding(start = (15.25).dp, end = 11.dp)
                 .size((17.45).dp),
             painter = painterResource(if (toDo.isChecked) Res.drawable.check_true else Res.drawable.check_false),
@@ -113,7 +112,7 @@ fun ToDoCard(
             )
             Image(
                 modifier = Modifier
-                    .clickable { onDelete(index) }
+                    .clickable { onDelete(toDo) }
                     .padding(start = (15.25).dp, end = 16.dp)
                     .height(14.dp)
                     .width(12.dp),
